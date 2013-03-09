@@ -1,0 +1,1 @@
+var App;App=function(){function a(){console.log("app started")}return a}(),new App
