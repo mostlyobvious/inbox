@@ -16,12 +16,9 @@ class App
     window.useCase = @useCase
 
   loadInitialFakeData: =>
-    messages = ['Hi!', 'How are you?']
-    senders  = for name in ['Alice', 'Bob', 'Claire', 'David']
-      new User(name)
+    senders  = (new User(Faker.Name.findName()) for _ in [1..8])
 
     for sender in senders
-      for message in messages
-        @useCase.messageReceived(new Message(sender, message))
+      (@useCase.messageReceived(new Message(sender, Faker.Lorem.paragraph())) for _ in [1..5])
 
 new App()

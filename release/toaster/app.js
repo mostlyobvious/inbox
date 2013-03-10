@@ -16,15 +16,12 @@ App = (function() {
   }
 
   App.prototype.loadInitialFakeData = function() {
-    var message, messages, name, sender, senders, _i, _len, _results;
-    messages = ['Hi!', 'How are you?'];
+    var sender, senders, _, _i, _len, _results;
     senders = (function() {
-      var _i, _len, _ref, _results;
-      _ref = ['Alice', 'Bob', 'Claire', 'David'];
+      var _i, _results;
       _results = [];
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        name = _ref[_i];
-        _results.push(new User(name));
+      for (_ = _i = 1; _i <= 8; _ = ++_i) {
+        _results.push(new User(Faker.Name.findName()));
       }
       return _results;
     })();
@@ -32,11 +29,10 @@ App = (function() {
     for (_i = 0, _len = senders.length; _i < _len; _i++) {
       sender = senders[_i];
       _results.push((function() {
-        var _j, _len1, _results1;
+        var _j, _results1;
         _results1 = [];
-        for (_j = 0, _len1 = messages.length; _j < _len1; _j++) {
-          message = messages[_j];
-          _results1.push(this.useCase.messageReceived(new Message(sender, message)));
+        for (_ = _j = 1; _j <= 5; _ = ++_j) {
+          _results1.push(this.useCase.messageReceived(new Message(sender, Faker.Lorem.paragraph())));
         }
         return _results1;
       }).call(this));
