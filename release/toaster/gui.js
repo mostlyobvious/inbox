@@ -4,6 +4,8 @@ var Gui,
 Gui = (function() {
 
   function Gui() {
+    this.openFirstConversation = __bind(this.openFirstConversation, this);
+
     this.hideConversation = __bind(this.hideConversation, this);
 
     this.conversationMessagePresenter = __bind(this.conversationMessagePresenter, this);
@@ -33,15 +35,14 @@ Gui = (function() {
   };
 
   Gui.prototype.showInbox = function(messages) {
-    var inbox, message, _i, _len, _results;
+    var inbox, message, _i, _len;
     inbox = this.createElementFor('#inbox-template');
     $('.main').append(inbox);
-    _results = [];
     for (_i = 0, _len = messages.length; _i < _len; _i++) {
       message = messages[_i];
-      _results.push(this.appendInboxMessage(message));
+      this.appendInboxMessage(message);
     }
-    return _results;
+    return this.openFirstConversation();
   };
 
   Gui.prototype.appendInboxMessage = function(message) {
@@ -88,6 +89,10 @@ Gui = (function() {
 
   Gui.prototype.hideConversation = function() {
     return $('.conversation').remove();
+  };
+
+  Gui.prototype.openFirstConversation = function() {
+    return $('.inbox-list li:first').find('.show-conversation').click();
   };
 
   return Gui;

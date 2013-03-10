@@ -12,6 +12,7 @@ class Gui
     $('.main').append(inbox)
     for message in messages
       @appendInboxMessage(message)
+    @openFirstConversation()
 
   appendInboxMessage: (message) =>
     element = @createElementFor('#inbox-message-template', @inboxMessagePresenter(message))
@@ -39,4 +40,7 @@ class Gui
 
   hideConversation: =>
     $('.conversation').remove()
+
+  openFirstConversation: =>
+    $('.inbox-list li:first').find('.show-conversation').click()
 
