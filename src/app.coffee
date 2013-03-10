@@ -19,6 +19,6 @@ class App
     senders  = (new User(Faker.Name.findName()) for _ in [1..8])
 
     for sender in senders
-      (@useCase.messageReceived(new Message(sender, Faker.Lorem.paragraph())) for _ in [1..5])
+      (@useCase.messageReceived(new Message(sender, Faker.Lorem.paragraph())) for _ in [1..Math.floor((Math.random() * 6) + 1)])
 
 new App()

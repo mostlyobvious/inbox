@@ -29,9 +29,9 @@ App = (function() {
     for (_i = 0, _len = senders.length; _i < _len; _i++) {
       sender = senders[_i];
       _results.push((function() {
-        var _j, _results1;
+        var _j, _ref, _results1;
         _results1 = [];
-        for (_ = _j = 1; _j <= 5; _ = ++_j) {
+        for (_ = _j = 1, _ref = Math.floor((Math.random() * 6) + 1); 1 <= _ref ? _j <= _ref : _j >= _ref; _ = 1 <= _ref ? ++_j : --_j) {
           _results1.push(this.useCase.messageReceived(new Message(sender, Faker.Lorem.paragraph())));
         }
         return _results1;
