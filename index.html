@@ -9,12 +9,25 @@
     <div class="main"></div>
 
     <script type="x-handlebars-template" id="inbox-template">
-      <h1>Inbox</h1>
-      <ul class="inbox"></ul>
+      <div class="inbox">
+        <h1>Inbox</h1>
+        <ul class="inbox-list"></ul>
+      </div>
+    </script>
+
+    <script type="x-handlebars-template" id="conversation-template">
+      <div class="conversation">
+        <h1>Conversation</h1>
+        <ul class="conversation-list"></ul>
+      </div>
     </script>
 
     <script type="x-handlebars-template" id="inbox-message-template">
-      <li class="inbox-message">{{name}}: {{body}}</li>
+      <li class="inbox-message"><a href="#" class="show-conversation">{{name}}: {{body}}</a></li>
+    </script>
+
+    <script type="x-handlebars-template" id="conversation-message-template">
+      <li class="inbox-message"><a href="#" class="show-conversation">{{name}}: {{body}}</a></li>
     </script>
 
     <script src="vendors/jquery-1.7.2.min.js" type="text/javascript"></script>

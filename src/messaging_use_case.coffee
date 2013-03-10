@@ -1,6 +1,6 @@
 class MessagingUseCase
   constructor: ->
-    @messages = []
+    @received_messages = []
 
   start: =>
     @showInbox()
@@ -9,13 +9,17 @@ class MessagingUseCase
 
   inboxMessages: =>
     senders  = []
-    messages = for message in @messages
+    messages = for message in @received_messages
       continue if _.contains(senders, message.sender)
       senders.push(message.sender)
       message
     messages
 
   messageReceived: (message) =>
-    @messages.push(message)
+    @received_messages.push(message)
 
+  showConversation: (user) =>
+
+  conversationMessages: (user) =>
+    _.filter(@received_messages, (message) -> message.sender == user)
 

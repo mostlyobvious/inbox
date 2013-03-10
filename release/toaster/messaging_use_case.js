@@ -4,6 +4,10 @@ var MessagingUseCase,
 MessagingUseCase = (function() {
 
   function MessagingUseCase() {
+    this.conversationMessages = __bind(this.conversationMessages, this);
+
+    this.showConversation = __bind(this.showConversation, this);
+
     this.messageReceived = __bind(this.messageReceived, this);
 
     this.inboxMessages = __bind(this.inboxMessages, this);
@@ -11,7 +15,7 @@ MessagingUseCase = (function() {
     this.showInbox = __bind(this.showInbox, this);
 
     this.start = __bind(this.start, this);
-    this.messages = [];
+    this.received_messages = [];
   }
 
   MessagingUseCase.prototype.start = function() {
@@ -25,7 +29,7 @@ MessagingUseCase = (function() {
     senders = [];
     messages = (function() {
       var _i, _len, _ref, _results;
-      _ref = this.messages;
+      _ref = this.received_messages;
       _results = [];
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         message = _ref[_i];
@@ -41,7 +45,15 @@ MessagingUseCase = (function() {
   };
 
   MessagingUseCase.prototype.messageReceived = function(message) {
-    return this.messages.push(message);
+    return this.received_messages.push(message);
+  };
+
+  MessagingUseCase.prototype.showConversation = function(user) {};
+
+  MessagingUseCase.prototype.conversationMessages = function(user) {
+    return _.filter(this.received_messages, function(message) {
+      return message.sender === user;
+    });
   };
 
   return MessagingUseCase;

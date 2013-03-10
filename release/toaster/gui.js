@@ -4,6 +4,16 @@ var Gui,
 Gui = (function() {
 
   function Gui() {
+    this.hideConversation = __bind(this.hideConversation, this);
+
+    this.conversationMessagePresenter = __bind(this.conversationMessagePresenter, this);
+
+    this.appendConversationMessage = __bind(this.appendConversationMessage, this);
+
+    this.showConversation = __bind(this.showConversation, this);
+
+    this.showConversationClicked = __bind(this.showConversationClicked, this);
+
     this.inboxMessagePresenter = __bind(this.inboxMessagePresenter, this);
 
     this.appendInboxMessage = __bind(this.appendInboxMessage, this);
@@ -35,8 +45,13 @@ Gui = (function() {
   };
 
   Gui.prototype.appendInboxMessage = function(message) {
-    message = this.createElementFor('#inbox-message-template', this.inboxMessagePresenter(message));
-    return $('.inbox').append(message);
+    var element,
+      _this = this;
+    element = this.createElementFor('#inbox-message-template', this.inboxMessagePresenter(message));
+    element.find('.show-conversation').click(function() {
+      return _this.showConversationClicked(message.sender);
+    });
+    return $('.inbox-list').append(element);
   };
 
   Gui.prototype.inboxMessagePresenter = function(message) {
@@ -44,6 +59,35 @@ Gui = (function() {
       name: message.sender.name,
       body: message.body
     };
+  };
+
+  Gui.prototype.showConversationClicked = function(user) {};
+
+  Gui.prototype.showConversation = function(messages) {
+    var conversation, message, _i, _len, _results;
+    this.hideConversation();
+    conversation = this.createElementFor('#conversation-template');
+    $('.main').append(conversation);
+    _results = [];
+    for (_i = 0, _len = messages.length; _i < _len; _i++) {
+      message = messages[_i];
+      _results.push(this.appendConversationMessage(message));
+    }
+    return _results;
+  };
+
+  Gui.prototype.appendConversationMessage = function(message) {
+    var element;
+    element = this.createElementFor('#conversation-message-template', this.conversationMessagePresenter(message));
+    return $('.conversation-list').append(element);
+  };
+
+  Gui.prototype.conversationMessagePresenter = function(message) {
+    return this.inboxMessagePresenter(message);
+  };
+
+  Gui.prototype.hideConversation = function() {
+    return $('.conversation').remove();
   };
 
   return Gui;
